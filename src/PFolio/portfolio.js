@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./PFolio.css";
 import images from "./data";
-import { SRLWrapper } from "simple-react-lightbox";
 import styled from "styled-components";
 import eye from "./eye.png";
 import code from "./code.png";
+import "../exceptionalstyles.css";
+import "../RNModal/Modal.css";
+// import Modal from "../RNModal/Modal";
+import Modal from "./Modal";
 
 let newDate = new Date();
 let date = newDate.getDate();
 let month = newDate.getMonth() + 1;
 let year = newDate.getFullYear();
 
-const Eyebtn = styled.div`
+const Eyebtn = styled.a`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -19,6 +22,7 @@ const Eyebtn = styled.div`
   z-index: 100;
   text-align: center;
   color: #fff;
+  /* border: red 9px solid; */
   margin: 25px 25px -25px 25px;
   width: 50px;
   height: 50px;
@@ -33,7 +37,7 @@ const Eyebtn = styled.div`
     transition: all ease-in-out 0.2s;
   }
 `;
-const Eyetxt = styled.a`
+const Eyetxt = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -119,6 +123,8 @@ const Overlay = styled.div`
 const options = {};
 
 function PFolio() {
+  const [modalOpen, setModalOpen] = useState(true);
+
   const [tag, setTag] = useState("Show all");
   const [filteredImages, setFilteredImages] = useState([]);
 
@@ -129,81 +135,128 @@ function PFolio() {
   }, [tag]);
 
   return (
-    <div className="PFbg">
-      <div>        <TagButton
-          name="React"
-          tagActive={tag === "React" ? true : false}
-          handleSetTag={setTag}
-        />
-        <TagButton
-          name="React-Native"
-          tagActive={tag === "React-Native" ? true : false}
-          handleSetTag={setTag}
-        />
-        <TagButton
-          name="Show all"
-          tagActive={tag === "Show all" ? true : false}
-          handleSetTag={setTag}
-        />
-        <TagButton
-          name="FireBase"
-          tagActive={tag === "FireBase" ? true : false}
-          handleSetTag={setTag}
-        />
-        <TagButton
-          name="Latest Job"
-          tagActive={tag === "Latest Job" ? true : false}
-          handleSetTag={setTag}
-        />
+    <div className="PFbg">        
+      {/* {modalOpen && <Modal setOpenModal={setModalOpen, console.log("zzzzzzz" + modalOpen)} />} */}
+
+      <div className="tags">
+        <div className="tagcont">
+          <TagButton
+            className="tagbtn"
+            name="React"
+            tagActive={tag === "React" ? true : false}
+            handleSetTag={setTag}
+          />
+          <TagButton
+            className="tagbtn"
+            name="React-Native"
+            tagActive={tag === "React-Native" ? true : false}
+            handleSetTag={setTag}
+          />
+          <TagButton
+            className="tagbtn"
+            name="Show all"
+            tagActive={tag === "Show all" ? true : false}
+            handleSetTag={setTag}
+          />
+          <TagButton
+            className="tagbtn"
+            name="FireBase"
+            tagActive={tag === "FireBase" ? true : false}
+            handleSetTag={setTag}
+          />
+          <TagButton
+            className="tagbtn"
+            name="Latest Job"
+            tagActive={tag === "Latest Job" ? true : false}
+            handleSetTag={setTag}
+          />
         </div>
-      <SRLWrapper options={options}>
-        <div className="PFcontainer">
-          {filteredImages.map(image => (
-            <>
-              <ImageCard key={image.id} className="imageCard">
-                <img
-                  className="image"
-                  src={`/images/${image.imageName}`}
-                  alt=""
-                />{" "}
-                <Overlay className="overlay">
-                  {" "}
-                  <div className="eyewrap">
-                    <div className="eyewrapline">
-                      <Eyebtn>
-                        <Eyetxt
-                          target="_blank"
-                          rel="noopener"
-                          href={`${image.seelink}`}
-                        >
-                          <Eyeimg src={eye} alt="eye" />
-                          <div className="eyediv">App</div>
-                        </Eyetxt>
-                      </Eyebtn>
-                      <Eyebtn id="eyecode">
-                        <Eyetxt
-                          target="_blank"
-                          rel="noopener"
-                          href={`${image.codelink}`}
-                        >
-                          <Eyeimg src={code} alt="eye" />
-                          <div className="eyediv">Code</div>
-                        </Eyetxt>
-                      </Eyebtn>
-                    </div>
-                    <div className="eyewrapcol">
-                      <Title>{image.title}</Title>
-                      <Softtitle>{image.software}</Softtitle>
-                      <Softtext>{image.description}</Softtext>
-                      <Softdate>{image.date}</Softdate>
-                    </div>
+      </div>
+      <div className="PFcontainer">
+        {filteredImages.map(image => (
+          <>
+            <ImageCard key={image.id} className="imageCard">
+              <img
+                className="image"
+                src={`/images/${image.imageName}`}
+                alt=""
+              />{" "}
+              <Overlay className="overlay">
+                {" "}
+                <div className="eyewrap">
+                  <div className="eyewrapline">
+                    <Eyebtn
+                      target="_blank"
+                      rel="noopener"
+                      href={`${image.seelink}`}
+                    >
+                      <Eyetxt
+                        target="_blank"
+                        rel="noopener"
+                        href={`${image.seelink}`}
+                      >
+                        <Eyeimg src={eye} alt="eye" />
+                        <div className="eyediv">App</div>
+                      </Eyetxt>
+                    </Eyebtn>
+                    <Eyebtn
+                      id="eyecode"
+                      target="_blank"
+                      rel="noopener"
+                      href={`${image.codelink}`}
+                    >
+                      <Eyetxt
+                        target="_blank"
+                        rel="noopener"
+                        href={`${image.codelink}`}
+                      >
+                        <Eyeimg src={code} alt="eye" />
+                        <div className="eyediv">Code</div>
+                      </Eyetxt>
+                    </Eyebtn>
                   </div>
-                </Overlay>
-              </ImageCard>
-            </>
-          ))}
-        </div>
-      </SRLWrapper>
+                  <div className="eyewrapcol">
+                    <Title>{image.title}</Title>
+                    <Softtitle>{image.software}</Softtitle>
+                    <Softtext>{image.description}</Softtext>
+                    <Softdate>{image.date}</Softdate>
+                  </div>
+                </div>
+              </Overlay>
+            </ImageCard>
+          </>
+        ))}
+        {/* <button
+          className="openModalBtn"
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Open
+        </button>        <button
+          className="openModalBtn"
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Open
+        </button>        <button
+          className="openModalBtn"
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Open
+        </button>        <button
+          className="openModalBtn"
+          onClick={() => {
+            setModalOpen(false);
+          }}
+        >
+          Open
+        </button> */}
+
+      </div>
     </div>
   );
 }

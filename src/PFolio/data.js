@@ -39,7 +39,7 @@ export default [
     id: "4",
     imageName: "income.jpg",
     seelink: "https://www.linkedin.com/in/benedikt-lantsoght-02481319/",
-    codelink: "https://www.linkedin.com/in/benedikt-lantsoght-02481319/",
+    codelink: "https://github.com/FrontEnd-React3/react-native-todo/blob/main/App.js",
     tag: ["Show all", "React-Native"],
     title: "Mobile Phone App",
     software: "React-Native",

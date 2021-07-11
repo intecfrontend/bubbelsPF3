@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import klas from "./IMGabout/class.jpg";
 import card from "./IMGabout/letmeseebc.jpg";
 import styled from "styled-components";
+import Aos from "aos";
 import "aos/dist/aos.css";
 
 const Aboutsectiontag = styled.div`
@@ -81,20 +82,22 @@ const Bcard = styled.img`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 3px 2px;
   @media (max-width: 1000px) {
-    width: 25vw !important;  top: 55vh;
-
+    width: 25vw !important;
+    top: 55vh;
   }
 `;
 
 function Aboutsection() {
+  useEffect(() => {Aos.init({ duration: 2000 }); }, [])
   return (
     <Aboutsectiontag>
       <Aboutcontainer>
+      <div data-aos="fade-right">
         <Abouttitle>
           Making <br />
           iT <br />
           happen
-        </Abouttitle>
+        </Abouttitle></div>
         <Abouttext>
           I have been a graphic designer since 1989, went back to school and
           learned how to code.
